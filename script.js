@@ -44,9 +44,16 @@ function renderBook(book) {
   } else {
     read.textContent += "No";
   }
+  let deleteButton = document.createElement("button");
+  deleteButton.className = "deleteButton";
+  deleteButton.textContent = "Delete";
+  deleteButton.addEventListener("click", () => {
+    card.remove();
+  });
   card.appendChild(author);
   card.appendChild(title);
   card.appendChild(number_of_pages);
   card.appendChild(read);
+  card.appendChild(deleteButton);
   document.body.appendChild(card);
 }

@@ -10,9 +10,8 @@ function Book(author, title, num_of_pages, read) {
 let addBook = document.querySelector(".new_book");
 addBook.addEventListener("click", addBookToLibrary);
 
-let arr = [];
-
 function addBookToLibrary() {
+  let arr = [];
   let author_prompt = prompt("What's the author of the book?:");
   arr.push(author_prompt);
   let title_prompt = prompt("Title of the book?:");
@@ -22,16 +21,32 @@ function addBookToLibrary() {
   let read_prompt = confirm("Have you read the book?:");
   arr.push(read_prompt);
   let current_book = new Book(arr[0], arr[1], arr[2], arr[3]);
-  let author_p = document.querySelector(".author");
-  author_p.textContent += current_book.author;
-  let title_p = document.querySelector(".title");
-  title_p.textContent += current_book.title;
-  let number_of_pages_p = document.querySelector(".number_of_pages");
-  number_of_pages_p.textContent += current_book.num_of_pages;
-  let read_p = document.querySelector(".read");
-  if (read_prompt === true) {
-    read_p.textContent += "Yes";
+  renderBook(current_book);
+}
+
+function renderBook(book) {
+  let card = document.createElement("div");
+  card.className = "card";
+  let author = document.createElement("p");
+  author.className = "author";
+  author.textContent = "Author: " + book.author;
+  let title = document.createElement("p");
+  title.className = "title";
+  title.textContent = "Title: " + book.title;
+  let number_of_pages = document.createElement("p");
+  number_of_pages.className = "number_of_pages";
+  number_of_pages.textContent = "Number of Pages: " + book.num_of_pages;
+  let read = document.createElement("p");
+  read.className = "read";
+  read.textContent = "Finished reading?: ";
+  if (book.read === true) {
+    read.textContent += "Yes";
   } else {
-    read_p.textContent += "No";
+    read.textContent += "No";
   }
+  card.appendChild(author);
+  card.appendChild(title);
+  card.appendChild(number_of_pages);
+  card.appendChild(read);
+  document.body.appendChild(card);
 }

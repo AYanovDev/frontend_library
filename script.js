@@ -50,10 +50,23 @@ function renderBook(book) {
   deleteButton.addEventListener("click", () => {
     card.remove();
   });
+  let editButton = document.createElement("button");
+  editButton.className = "editButton";
+  editButton.textContent = "Edit";
+  let clickState = 1;
+  editButton.addEventListener("click", () => {
+    clickState++;
+    if (clickState % 2 === 0) {
+      editButton.textContent = "Save";
+    } else {
+      editButton.textContent = "Edit";
+    }
+  });
   card.appendChild(author);
   card.appendChild(title);
   card.appendChild(number_of_pages);
   card.appendChild(read);
   card.appendChild(deleteButton);
+  card.appendChild(editButton);
   document.body.appendChild(card);
 }

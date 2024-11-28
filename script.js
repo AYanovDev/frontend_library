@@ -1,10 +1,19 @@
 let myLibrary = [];
 
-function Book(author, title, num_of_pages, read) {
-  this.author = author;
-  this.title = title;
-  this.num_of_pages = num_of_pages;
-  this.read = read;
+// function Book(author, title, num_of_pages, read) {
+//   this.author = author;
+//   this.title = title;
+//   this.num_of_pages = num_of_pages;
+//   this.read = read;
+// }
+
+class Book {
+  constructor(author, title, num_of_pages, read) {
+    this.author = author;
+    this.title = title;
+    this.num_of_pages = num_of_pages;
+    this.read = read;
+  }
 }
 
 let addBook = document.querySelector(".new_book");
@@ -54,12 +63,37 @@ function renderBook(book) {
   editButton.className = "editButton";
   editButton.textContent = "Edit";
   let clickState = 1;
+  let editAuthor = document.createElement("button");
+  editAuthor.className = "editAuthor";
+  editAuthor.textContent = "Edit Author";
+  editAuthor.addEventListener("click", () => {
+    book.author = prompt("What's the author of the book?:", book.author);
+    author.textContent = "Author: " + book.author;
+    author.appendChild(editAuthor);
+  });
+  let editTitle = document.createElement("button");
+  editTitle.className = "editTitle";
+  editTitle.textContent = "Edit Title";
+  let editNumber_of_pages = document.createElement("button");
+  editNumber_of_pages.className = "editNumber_of_pages";
+  editNumber_of_pages.textContent = "Edit number of pages";
+  let editRead = document.createElement("button");
+  editRead.className = "editRead";
+  editRead.textContent = "Change";
   editButton.addEventListener("click", () => {
     clickState++;
     if (clickState % 2 === 0) {
       editButton.textContent = "Save";
+      author.appendChild(editAuthor);
+      title.appendChild(editTitle);
+      number_of_pages.appendChild(editNumber_of_pages);
+      read.appendChild(editRead);
     } else {
       editButton.textContent = "Edit";
+      editAuthor.remove();
+      editTitle.remove();
+      editNumber_of_pages.remove();
+      editRead.remove();
     }
   });
   card.appendChild(author);
